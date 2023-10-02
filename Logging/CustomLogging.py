@@ -90,7 +90,7 @@ class Logger():
         self.handler = ch
 
     def custom_logs(self, text):
-        self.custom_logs(text)
+        self.log.custom_logs(text)
         self.handler.flush()
 
     def log_error(self, text):
