@@ -59,10 +59,7 @@ def addLoggingLevel(levelName, levelNum, methodName=None):
 
 class Logger():
 
-    def __init__(self):
-
-        self.stream = io.StringIO()
-
+    def __init__(self, _name,**kwargs):
         # Add custom logging with levels (Higher number take precedence)
         #Logging levels for reference
         # NOTSET = 0
@@ -72,27 +69,28 @@ class Logger():
         # ERROR = 40
         # CRITICAL = 50
 
-        if 'LOG' not in dir(logging):
-            addLoggingLevel('LOG', 55, 'custom_logs')
+        self.logger = logging.getLogger(_name)
+        self.logger.setLevel(logging.ERROR)
+        self.logger.propagate = False
 
-        rootlogger = logging.getLogger()
-        rootlogger.setLevel(logging.ERROR)
-        rootlogger.propagate = False
+        if 'stream' in kwargs.keys():
+            # 1 stream handler per logger
+            self.stream = io.StringIO()
+            ch = logging.StreamHandler(self.stream)
+            logging.Formatter.converter = timetz
+            formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s',"%Y-%m-%d %H:%M:%S")
+            ch.setFormatter(formatter)
+            self.logger.addHandler(ch)
 
-        ch = logging.StreamHandler(self.stream)
-        logging.Formatter.converter = timetz
-        formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s',"%Y-%m-%d %H:%M:%S")
-        ch.setFormatter(formatter)
+        if 'file' in kwargs.keys():
+            # Multiple File Handlers
+            for filename in kwargs['file']:
+                file_handler = logging.FileHandler(filename)
+                logging.Formatter.converter = timetz
+                formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s', "%Y-%m-%d %H:%M:%S")
+                file_handler.setFormatter(formatter)
+                self.logger.addHandler(file_handler)
 
-        rootlogger.addHandler(ch)
-
-        self.log = rootlogger
-        self.handler = ch
-
-    def custom_logs(self, text):
-        self.log.custom_logs(text)
-        self.handler.flush()
-
-    def log_error(self, text):
-        self.log.error(text)
-        self.handler.flush
+    def flush(self):
+        for handler in self.handlers:
+            handler.flush

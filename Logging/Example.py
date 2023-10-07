@@ -1,26 +1,32 @@
 import logging
 
-from CustomLogging import Logger
+from CustomLogging import Logger, timetz, addLoggingLevel
 from datetime import datetime
 import pytz
 import functools
 
-current_date = datetime.now(pytz.timezone('Asia/Singapore')).strftime('%Y%m%d')
-logfilename = f"{current_date}.log"
-rootlogger  = Logger()
+def add_logging_level(text, level_number, function_name):
+    if text not in dir(logging):
+        addLoggingLevel(text, level_number, function_name)
 
-logger = logging.getLogger()
+add_logging_level('LOG',55,'custom_logs')
+
+current_date = datetime.now(pytz.timezone('Asia/Singapore')).strftime('%Y%m%d')
+logfilename = f"logfiles/{current_date}.log"
+logfilename2 = f"logfiles/{current_date}.log2"
+rootlogger  = Logger('Example',stream='',file=[logfilename,logfilename2])
+
 
 def log_fuction(func):
     def wrapper(*args, **kwargs):
-        logger.info(f'Calling function : {func.__name__}')
+        rootlogger.logger.info(f'Calling function : {func.__name__}')
         try:
             result = func(*args, **kwargs)
-            logger.custom_logs(f'Function {func.__name__} completed successfully')
+            rootlogger.logger.custom_logs(f'Function {func.__name__} completed successfully')
             print(f'Function {func.__name__} completed successfully')
             return result
         except Exception as e:
-            logger.error(f'Function {func.__name__} failed with error : {str(e)}')
+            rootlogger.logger.error(f'Function {func.__name__} failed with error : {str(e)}')
             print(f'Function {func.__name__} failed with error : {str(e)}')
             # raise
 

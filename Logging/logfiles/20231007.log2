@@ -1,0 +1,24 @@
+2023-10-07 07:55:31 Example LOG Function division completed successfully
+2023-10-07 07:55:31 Example ERROR Function division failed with error : division by zero
+2023-10-07 07:56:05 Example LOG Function division completed successfully
+2023-10-07 07:56:05 Example ERROR Function division failed with error : division by zero
+2023-10-07 07:58:04 Example LOG Function division completed successfully
+2023-10-07 07:58:04 Example ERROR Function division failed with error : division by zero
+2023-10-07 07:58:30 Example LOG Function division completed successfully
+2023-10-07 07:58:30 Example ERROR Function division failed with error : division by zero
+2023-10-07 07:58:40 Example LOG Function division completed successfully
+2023-10-07 07:58:40 Example ERROR Function division failed with error : division by zero
+2023-10-07 07:58:55 Example LOG Function division completed successfully
+2023-10-07 07:58:55 Example ERROR Function division failed with error : division by zero
+2023-10-07 07:59:23 Example LOG Function division completed successfully
+2023-10-07 07:59:23 Example ERROR Function division failed with error : division by zero
+2023-10-07 08:00:25 Example LOG Function division completed successfully
+2023-10-07 08:00:25 Example ERROR Function division failed with error : division by zero
+2023-10-07 08:01:44 Example LOG Function division completed successfully
+2023-10-07 08:01:44 Example ERROR Function division failed with error : division by zero
+2023-10-07 08:04:28 Example LOG Function division completed successfully
+2023-10-07 08:04:28 Example ERROR Function division failed with error : division by zero
+2023-10-07 08:06:24 main LOGT Running cell 3 : *** Test_cell_run ***
+2023-10-07 08:06:24 main LOGT Cell 3 ran successfully. Time taken 0:00:00
+2023-10-07 08:06:26 main LOGT Running cell 4 : *** Test_cell_run ***
+2023-10-07 08:06:26 main ERROR Cell 4 failed with error : division by zero
